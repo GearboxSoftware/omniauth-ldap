@@ -17,9 +17,8 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'rack-test'
   gem.add_development_dependency 'libnotify'
 
-  gem.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
-  gem.files         = `git ls-files`.split("\n")
-  gem.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
+  gem.files         = `find . -type f ! -path "./spec/reports/*" ! -path "./coverage/*" ! -path "./.*" ! -name "Gemfile.lock"`.split($OUTPUT_RECORD_SEPARATOR)
+  gem.test_files    = `find spec -type f ! -path "spec/reports/*"`.split($OUTPUT_RECORD_SEPARATOR)
   gem.name          = "omniauth-ldap"
   gem.require_paths = ["lib"]
   gem.version       = OmniAuth::LDAP::VERSION
